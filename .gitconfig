@@ -1,0 +1,18 @@
+[user]
+	name = Vince Panuccio
+	email = panuccio.vince@gmail.com
+
+[core]
+	autocrlf = false
+	excludesfile = ~/.gitignore_global
+
+[diff]
+    tool = kdiff3
+	
+[merge]
+	tool = kdiff
+
+[mergetool "kdiff"]
+	cmd = i:/dev/tools/KDiff3/kdiff3.exe $BASE $LOCAL $REMOTE -o $MERGED
+	keepBackup = false
+	trustExitCode = false
