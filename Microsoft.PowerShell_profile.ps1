@@ -29,7 +29,7 @@ Set-Alias lpad "$toolsPath\LINQPad\LINQPad.exe"
 Set-Alias winm "$toolsPath\WinMerge\WinMergeU.exe"
 
 ## Will get the last assembly compiled by linqpad and run JustDecompile to disassemble it.
-Set-Alias lpadec "gci ""$env:TEMP\linqpad"" -Directory | Sort-Object LastWriteTime -Descending | select -First 1 | gci -filter *.dll | Sort-Object LastWriteTime -Descending | select -First 1 | % { & ""c:\Program Files (x86)\Telerik\JustDecompile\Libraries\JustDecompile.exe"" $_.FullName }"
+function lpadis { gci "$env:TEMP\linqpad" -Directory | Sort-Object LastWriteTime -Descending | select -First 1 | gci -filter *.dll | Sort-Object LastWriteTime -Descending | select -First 1 | % { & 'c:\Program Files (x86)\Telerik\JustDecompile\Libraries\JustDecompile.exe' $_.FullName } }
 
 # Fool git in to thinking it's in a TERM session.
 $env:TERM = 'cygwin'
