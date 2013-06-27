@@ -4,10 +4,11 @@
 ##
 ##############################################################################
 
-$toolsPath = "%toolspath%"
-$utilsPath = "%utilspath%"
+$rootPath = '%rootPath%'
+$toolsPath = "$rootPath\tools"
+$utilsPath = "$rootPath\utils"
 $gitPath = "$toolsPath\git"
-$scriptsPath = "$toolsPath\psscripts"
+$scriptsPath = "$rootPath\psscripts"
 
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $toolsPath, "Process")
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $gitPath "\bin"), "Process")
@@ -27,9 +28,12 @@ Set-Alias kdiff "$toolsPath\kDiff3\kdiff3.exe"
 Set-Alias ilspy "$toolsPath\ILSpy\ilspy.exe"
 Set-Alias lpad "$toolsPath\LINQPad\LINQPad.exe"
 Set-Alias winm "$toolsPath\WinMerge\WinMergeU.exe"
+Set-Alias g "git"
+Set-Alias regexb "$toolsPath\RegexBuddy3\RegexBuddy.exe"
 
 ## Will get the last assembly compiled by linqpad and run JustDecompile to disassemble it.
 function lpadis { gci "$env:TEMP\linqpad" -Directory | Sort-Object LastWriteTime -Descending | select -First 1 | gci -filter *.dll | Sort-Object LastWriteTime -Descending | select -First 1 | % { & 'c:\Program Files (x86)\Telerik\JustDecompile\Libraries\JustDecompile.exe' $_.FullName } }
+function gs { invoke-command -scriptblock { git status } }
 
 # Fool git in to thinking it's in a TERM session.
 $env:TERM = 'cygwin'

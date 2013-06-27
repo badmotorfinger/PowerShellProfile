@@ -1,6 +1,10 @@
 #Run this script the first time you log on to a machine you've never logged on to before.
 
+#$env:path.IndexOf('Chocolatey', [System.StringComparison]::OrdinalIgnoreCase) -gt 0
+
 $currentDir = Split-Path $MyInvocation.MyCommand.Definition
+
+Write-Host "Current directory is $currentDir"
 
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
 
@@ -8,9 +12,10 @@ if (-not (Test-Path $powershellProfileDir)) {
     mkdir $powershellProfileDir
 }
 
-$parent = [System.IO.Directory]::GetParent($currentDir)
+$rootPath = [System.IO.Directory]::GetParent($currentDir).Parent
 
-Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" | % { $_.Replace("%toolspath%", $parent.FullName).Replace("%utilspath%", ($parent.Parent.FullName + "\utils")) } | Set-Content $PROFILE
+Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" | 
+	% { $_.Replace('%rootPath%', $rootPath.FullName) } | Set-Content $PROFILE
 
 $moduleRoot = $env:PSModulePath.Split(";")[0]
 
