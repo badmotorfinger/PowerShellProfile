@@ -119,3 +119,5 @@ function prompt {
 		Write-Host "Done."
 	}	
  }
+ 
+ iex ". $scriptsPath\z\z.ps1"
