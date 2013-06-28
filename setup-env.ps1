@@ -44,4 +44,4 @@ if ( -not (get-module powertab)) {
 	Copy-Item "..\psscripts\Modules\PowerTab" -Dest $moduleRoot -Recurse -Force -Verbose
 }
 
-. $PROFILE
+Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow

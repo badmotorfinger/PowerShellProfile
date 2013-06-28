@@ -60,8 +60,8 @@ function prompt {
 	 }
 
 	ImportModules
-	GetAliasSuggestion
-
+	GetAliasSuggestion #Display aliases for commands if they exist.
+		
     $symbolicref = git symbolic-ref HEAD
     
     if($symbolicref -ne $NULL) {
@@ -104,20 +104,18 @@ function prompt {
  function ImportModules() {
  		
 	if (-not (Get-Module Pscx)) {
-		Write-Host "Importing modules..." -NoNewline
-		Import-Module Pscx
+		Write-Host "Importing Pscx module..." -NoNewline
+		Import-Module Pscx | Out-Null
+		Write-Host 'Done' -ForegroundColor Yellow
 	}
 	
-	if (-not (Get-Module PowerTab)) {
-		
+	if (-not (Get-Module PowerTab)) {	
 		if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
-			Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml"
+			 $null = Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml" | Out-Null
 		} else {
-			Import-Module PowerTab
+			Import-Module PowerTab | Out-Null
 		}
-		
-		Write-Host "Done."
 	}	
  }
  
- iex ". $scriptsPath\z\z.ps1"
+ iex ". $scriptsPath\z\z.ps1" # Load z script in to the environment.
