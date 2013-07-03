@@ -31,7 +31,7 @@ if ( -not (get-module pscx)) {
 	if (-not (Test-Path $pscxDir)) {
 		md -Path $pscxDir
 	}
-	Copy-Item "..\psscripts\Modules\Pscx" -Dest $moduleRoot -Recurse -Force -Verbose
+	Copy-Item "..\Modules\Pscx" -Dest $moduleRoot -Recurse -Force -Verbose
 }
 
 if ( -not (get-module powertab)) {
@@ -41,7 +41,27 @@ if ( -not (get-module powertab)) {
 	if (-not (Test-Path $ptDir)) {
 		md -Path $ptDir
 	}
-	Copy-Item "..\psscripts\Modules\PowerTab" -Dest $moduleRoot -Recurse -Force -Verbose
+	Copy-Item "..\Modules\PowerTab" -Dest $moduleRoot -Recurse -Force -Verbose
+}
+
+if ( -not (get-module z)) {
+
+	$ptDir = Join-Path $moduleRoot 'z'
+
+	if (-not (Test-Path $ptDir)) {
+		md -Path $ptDir
+	}
+	Copy-Item "..\z" -Dest $moduleRoot -Recurse -Force -Verbose
+}
+
+if ( -not (get-module ShowCalendar)) {
+
+	$ptDir = Join-Path $moduleRoot 'ShowCalendar'
+
+	if (-not (Test-Path $ptDir)) {
+		md -Path $ptDir
+	}
+	Copy-Item "..\Modules\ShowCalendar" -Dest $moduleRoot -Recurse -Force -Verbose
 }
 
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow

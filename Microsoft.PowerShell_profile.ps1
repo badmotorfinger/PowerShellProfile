@@ -115,7 +115,11 @@ function prompt {
 		} else {
 			Import-Module PowerTab | Out-Null
 		}
-	}	
+	}
+	
+	if (-not (Get-Module z)) {
+		Write-Host "Importing z module..." -NoNewline
+		Import-Module z
+		Write-Host 'Done' -ForegroundColor Yellow
+	}
  }
- 
- iex ". $scriptsPath\z\z.ps1" # Load z script in to the environment.
