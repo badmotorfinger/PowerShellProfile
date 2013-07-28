@@ -122,4 +122,12 @@ function prompt {
 		Import-Module z
 		Write-Host 'Done' -ForegroundColor Yellow
 	}
+	
+	if (-not (Get-Module posh-git)) {
+		Write-Host "Importing posh-git module..." -NoNewline
+		Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+		Import-Module posh-git
+		Pop-Location
+		Write-Host 'Done' -ForegroundColor Yellow
+	}
  }
