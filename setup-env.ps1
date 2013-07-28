@@ -23,45 +23,26 @@ if (-not (Test-Path $moduleRoot)) {
 	md -Path $env:PSModulePath.Split(";")[0]
 }
 
+function CopyModule
+{
+	param($moduleName)
+	
+	if ( -not (get-module $moduleName)) {
+
+		$ptDir = Join-Path $moduleRoot $moduleName
+
+		if (-not (Test-Path $ptDir)) {
+			md -Path $ptDir
+		}
+		Copy-Item "..\Modules\$moduleName" -Dest $moduleRoot -Recurse -Force -Verbose
+	}
+}
+
 # Modules
-if ( -not (get-module pscx)) {
-	
-	$pscxDir = Join-Path $moduleRoot 'Pscx'
-	
-	if (-not (Test-Path $pscxDir)) {
-		md -Path $pscxDir
-	}
-	Copy-Item "..\Modules\Pscx" -Dest $moduleRoot -Recurse -Force -Verbose
-}
-
-if ( -not (get-module powertab)) {
-
-	$ptDir = Join-Path $moduleRoot 'PowerTab'
-
-	if (-not (Test-Path $ptDir)) {
-		md -Path $ptDir
-	}
-	Copy-Item "..\Modules\PowerTab" -Dest $moduleRoot -Recurse -Force -Verbose
-}
-
-if ( -not (get-module z)) {
-
-	$ptDir = Join-Path $moduleRoot 'z'
-
-	if (-not (Test-Path $ptDir)) {
-		md -Path $ptDir
-	}
-	Copy-Item "..\z" -Dest $moduleRoot -Recurse -Force -Verbose
-}
-
-if ( -not (get-module ShowCalendar)) {
-
-	$ptDir = Join-Path $moduleRoot 'ShowCalendar'
-
-	if (-not (Test-Path $ptDir)) {
-		md -Path $ptDir
-	}
-	Copy-Item "..\Modules\ShowCalendar" -Dest $moduleRoot -Recurse -Force -Verbose
-}
+CopyModule 'Pscx'
+CopyModule 'PowerTab'
+CopyModule 'z'
+CopyModule 'ShowCalendar'
+CopyModule 'posh-git'
 
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow
