@@ -25,23 +25,20 @@ if (-not (Test-Path $moduleRoot)) {
 
 function CopyModule
 {
-	param($moduleName)
+	param($moduleName, $startingPath = '..\Modules\')
 	
-	if ( -not (get-module $moduleName)) {
+	$ptDir = Join-Path $moduleRoot $moduleName
 
-		$ptDir = Join-Path $moduleRoot $moduleName
-
-		if (-not (Test-Path $ptDir)) {
-			md -Path $ptDir
-		}
-		Copy-Item "..\Modules\$moduleName" -Dest $moduleRoot -Recurse -Force -Verbose
+	if (-not (Test-Path $ptDir)) {
+		md -Path $ptDir
 	}
+	Copy-Item ($startingPath + $moduleName) -Dest $moduleRoot -Recurse -Force -Verbose
 }
 
 # Modules
 CopyModule 'Pscx'
 CopyModule 'PowerTab'
-CopyModule 'z'
+CopyModule 'z' '..\'
 CopyModule 'ShowCalendar'
 CopyModule 'posh-git'
 
