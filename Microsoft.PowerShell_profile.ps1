@@ -30,6 +30,7 @@ Set-Alias lpad "$toolsPath\LINQPad\LINQPad.exe"
 Set-Alias winm "$toolsPath\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
 Set-Alias regexb "$toolsPath\RegexBuddy3\RegexBuddy.exe"
+Set-Alias vim "$toolsPath\Vim\vim74]$"
 Set-Alias efh ExplorerFromHere
 
 ## Will get the last assembly compiled by linqpad and run JustDecompile to disassemble it.
