@@ -29,7 +29,7 @@ Set-Alias ilspy "$toolsPath\ILSpy\ilspy.exe"
 Set-Alias lpad "$toolsPath\LINQPad\LINQPad.exe"
 Set-Alias winm "$toolsPath\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
-Set-Alias regexb "$toolsPath\RegexBuddy3\RegexBuddy.exe"
+Set-Alias regexb "$toolsPath\RegexBuddy\RegexBuddy4.exe"
 Set-Alias vim "$toolsPath\Vim\vim74\vim.exe"
 Set-Alias efh ExplorerFromHere
 
