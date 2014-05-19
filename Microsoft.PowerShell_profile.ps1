@@ -33,6 +33,7 @@ Set-Alias regexb "$toolsPath\RegexBuddy\RegexBuddy4.exe"
 Set-Alias vim "$toolsPath\Vim\vim74\gvim.exe"
 Set-Alias efh ExplorerFromHere
 Set-Alias less "$utilsPath\UnixUtils\less.exe"
+Set-Alias fsi "C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\fsi.exe"
 
 ## Will get the last assembly compiled by linqpad and run JustDecompile to disassemble it.
 function gs { invoke-command -scriptblock { git status } }
