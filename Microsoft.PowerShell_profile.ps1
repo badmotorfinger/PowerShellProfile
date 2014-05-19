@@ -9,9 +9,11 @@ $toolsPath = "$rootPath\tools"
 $utilsPath = "$rootPath\utils"
 $gitPath = "$toolsPath\git"
 $scriptsPath = "$rootPath\psscripts"
+$hgPath = "$toolsPath\mercurial"
 
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $toolsPath, "Process")
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $gitPath "\bin"), "Process")
+[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $hgPath, "Process")
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $scriptsPath, "Process")
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $toolsPath "\UnixUtils"), "Process")
 [System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $utilsPath "\SysinternalsSuite"), "Process")
