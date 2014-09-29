@@ -2,6 +2,7 @@
 
 #$env:path.IndexOf('Chocolatey', [System.StringComparison]::OrdinalIgnoreCase) -gt 0
 
+$rootDevPath = 'D:\dev\'
 $currentDir = Split-Path $MyInvocation.MyCommand.Definition
 
 Write-Host "Current directory is $currentDir"
@@ -14,8 +15,9 @@ if (-not (Test-Path $powershellProfileDir)) {
 
 $rootPath = [System.IO.Directory]::GetParent($currentDir).Parent
 
-Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" | 
-	% { $_.Replace('%rootPath%', $rootPath.FullName) } | Set-Content $PROFILE
+Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" |
+	% { $_.Replace('%rootPath%', $rootPath.FullName) } |
+    % { $_.Replace('%rootDevPath%', $rootDevPath) } | Set-Content $PROFILE
 
 $moduleRoot = $env:PSModulePath.Split(";")[0]
 
@@ -26,7 +28,7 @@ if (-not (Test-Path $moduleRoot)) {
 function CopyModule
 {
 	param($moduleName, $startingPath = '..\Modules\')
-	
+
 	$ptDir = Join-Path $moduleRoot $moduleName
 
 	if (-not (Test-Path $ptDir)) {
@@ -41,5 +43,11 @@ CopyModule 'PowerTab'
 CopyModule 'z' '..\'
 CopyModule 'ShowCalendar'
 CopyModule 'posh-git'
+CopyModule 'PSReadLine'
 
+Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow
+Write-Host
+Write-Host "Root Path = $currentDir" -ForegroundColor Green
+Write-Host "Root Development Path = $rootDevPath" -ForegroundColor Green
+Write-Host
