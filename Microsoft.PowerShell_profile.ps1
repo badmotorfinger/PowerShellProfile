@@ -134,41 +134,45 @@ function prompt {
 
  function ImportModules() {
 
-	if (-not (Get-Module Pscx)) {
-		Write-Host "Importing Pscx module..." -NoNewline
-		Import-Module Pscx | Out-Null
-		Write-Host 'Done' -ForegroundColor Yellow
-	}
+    if ($global:mod_loaded -eq $null) {
 
-	if (-not (Get-Module PowerTab)) {
-		if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
-			 $null = Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml" | Out-Null
-		} else {
-			Import-Module PowerTab | Out-Null
-		}
-	}
+        if (-not (Get-Module Pscx)) {
+            Write-Host "Importing Pscx module..." -NoNewline
+            Import-Module Pscx | Out-Null
+            Write-Host 'Done' -ForegroundColor Yellow
+        }
 
-	if (-not (Get-Module z)) {
-		Write-Host "Importing z module..." -NoNewline
-		Import-Module z
-		Write-Host 'Done' -ForegroundColor Yellow
-	}
+        if (-not (Get-Module PowerTab)) {
+            if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
+                $null = Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml" | Out-Null
+            } else {
+                Import-Module PowerTab | Out-Null
+            }
+        }
 
-	if (-not (Get-Module posh-git)) {
-		Write-Host "Importing posh-git module..." -NoNewline
-		Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-		Import-Module posh-git
-		Pop-Location
-		Write-Host 'Done' -ForegroundColor Yellow
-	}
+        if (-not (Get-Module z)) {
+            Write-Host "Importing z module..." -NoNewline
+            Import-Module z
+            Write-Host 'Done' -ForegroundColor Yellow
+        }
 
-    # PSReadLine Module
-    if (-not (Get-Module PSReadLine)) {
+        if (-not (Get-Module posh-git)) {
+            Write-Host "Importing posh-git module..." -NoNewline
+            Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+            Import-Module posh-git
+            Pop-Location
+            Write-Host 'Done' -ForegroundColor Yellow
+        }
 
-	Write-Host "Importing PSReadLine module..." -NoNewline
-        Import-Module PSReadline
-        Write-Host 'Done' -ForegroundColor Yellow
+        # PSReadLine Module
+        if (-not (Get-Module PSReadLine)) {
 
-        Write-Host # Leave a blank line once the last module has been imported.
+            Write-Host "Importing PSReadLine module..." -NoNewline
+            Import-Module PSReadline
+            Write-Host 'Done' -ForegroundColor Yellow
+            Write-Host # Leave a blank line once the last module has been imported.
+        }
+
+        $global:mod_loaded = 'loaded'
     }
  }
