@@ -63,6 +63,7 @@ Set-Alias fsi "C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\fsi.e
 Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
 function gs { invoke-command -scriptblock { git status } }
+function gsvn { invoke-command -scriptblock { git svn dcommit } } # git svn commit alias
 function ExplorerFromHere { explorer (Get-Location).Path }
 function gsvn { invoke-command -scriptblock { git svn dcommit } }
 
