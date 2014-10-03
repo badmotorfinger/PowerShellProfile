@@ -23,45 +23,44 @@ function setEnvVariable($name, $value)
             return;
         }
 
-        [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+        [System.Environment]::SetEnvironmentVariable($name, $Env:Path.TrimEnd(';') + ";" + $value, "Process")
         return;
     }
 
     [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
-    setx $name $value
+    setx $name $value | Out-Null
 }
 
-setEnvVariable "PATH" ($Env:Path + ";" + $toolsPath)
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $gitPath "\bin"))
-setEnvVariable "PATH" ($Env:Path + ";" + $hgPath)
-setEnvVariable "PATH" ($Env:Path + ";" + $scriptsPath)
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\UnixUtils"))
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $utilsPath "\SysinternalsSuite"))
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\fizzler"))
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\Remote Desktop Connection Manager"))
+setEnvVariable "PATH" $toolsPath
+setEnvVariable "PATH" (Join-Path $gitPath "\bin")
+setEnvVariable "PATH" $hgPath
+setEnvVariable "PATH" $scriptsPath
+setEnvVariable "PATH" (Join-Path $toolsPath "\UnixUtils")
+setEnvVariable "PATH" (Join-Path $utilsPath "\SysinternalsSuite")
+setEnvVariable "PATH" (Join-Path $toolsPath "\fizzler")
+setEnvVariable "PATH" (Join-Path $toolsPath "\Remote Desktop Connection Manager")
 
 # Go lang
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\go\bin"))
+setEnvVariable "PATH" (Join-Path $rootDevPath "\go\bin")
 setEnvVariable "GOROOT" (Join-Path $rootDevPath "\go")
 
 # Python
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\python27"))
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\python27\scripts"))
+setEnvVariable "PATH" (Join-Path $rootDevPath "\python27")
+setEnvVariable "PATH" (Join-Path $rootDevPath "\python27\scripts")
 
 # Ruby
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\Ruby193\bin"))
+setEnvVariable "PATH" (Join-Path $rootDevPath "\Ruby193\bin")
 
 # Android
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\tools"))
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\platform-tools"))
+setEnvVariable "PATH" (Join-Path $rootDevPath "\android-sdk\tools")
+setEnvVariable "PATH" (Join-Path $rootDevPath "\android-sdk\platform-tools")
 setEnvVariable "ANDROID_NDK_PATH" (Join-Path $rootDevPath "\ndk\android-ndk-r8d")
 setEnvVariable "ANDROID_SDK_HOME" (Join-Path $rootDevPath "\android-sdk")
 setEnvVariable "ADT_HOME" (Join-Path $rootDevPath "\android-sdk")
 
 # Ant
 setEnvVariable "ANT_HOME" (Join-Path $rootDevPath "\apache-ant-1.9.4")
-setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\apache-ant-1.9.4\bin"))
-
+setEnvVariable "PATH" (Join-Path $rootDevPath "\apache-ant-1.9.4\bin")
 
 ## [System.Environment]::SetEnvironmentVariable("GIT_EXTERNAL_DIFF", ($toolsPath.Replace('\', '/') + '/KDiff3/kdiff3.exe'), "Process")
 
