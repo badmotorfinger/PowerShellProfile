@@ -4,8 +4,8 @@
 ##
 ##############################################################################
 
-$rootPath = '%rootPath%'
-$rootDevPath = '%rootDevPath%'
+$rootPath = 'C:\Users\Vince\SkyDrive'
+$rootDevPath = 'D:\dev\'
 
 $toolsPath = "$rootPath\tools"
 $utilsPath = "$rootPath\utils"
@@ -13,36 +13,54 @@ $gitPath = "$toolsPath\git"
 $scriptsPath = "$rootPath\psscripts"
 $hgPath = "$toolsPath\mercurial"
 
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $toolsPath, "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $gitPath "\bin"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $hgPath, "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + $scriptsPath, "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $toolsPath "\UnixUtils"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $utilsPath "\SysinternalsSuite"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $toolsPath "\fizzler"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $toolsPath "\Remote Desktop Connection Manager"), "Process")
+
+function setEnvVariable($name, $value)
+{
+    $existingValue = [System.Environment]::GetEnvironmentVariable($name)
+
+    if ($name -eq "PATH") {
+        if ($existingValue -contains $value) {
+            return;
+        }
+
+        [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+        return;
+    }
+
+    [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+    setx $name $value
+}
+
+setEnvVariable "PATH" ($Env:Path + ";" + $toolsPath)
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $gitPath "\bin"))
+setEnvVariable "PATH" ($Env:Path + ";" + $hgPath)
+setEnvVariable "PATH" ($Env:Path + ";" + $scriptsPath)
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\UnixUtils"))
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $utilsPath "\SysinternalsSuite"))
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\fizzler"))
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $toolsPath "\Remote Desktop Connection Manager"))
 
 # Go lang
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\go\bin"), "Process")
-[System.Environment]::SetEnvironmentVariable("GOROOT", (Join-Path $rootDevPath "\go"), "Process")
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\go\bin"))
+setEnvVariable "GOROOT" (Join-Path $rootDevPath "\go")
 
 # Python
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\python27"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\python27\scripts"), "Process")
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\python27"))
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\python27\scripts"))
 
 # Ruby
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\Ruby193\bin"), "Process")
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\Ruby193\bin"))
 
 # Android
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\tools"), "Process")
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\platform-tools"), "Process")
-[System.Environment]::SetEnvironmentVariable("ANDROID_NDK_PATH", (Join-Path $rootDevPath "\ndk\android-ndk-r8d"), "Process")
-[System.Environment]::SetEnvironmentVariable("ANDROID_SDK_HOME", (Join-Path $rootDevPath "\android-sdk"), "Process")
-[System.Environment]::SetEnvironmentVariable("ADT_HOME", (Join-Path $rootDevPath "\android-sdk"), "Process")
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\tools"))
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\android-sdk\platform-tools"))
+setEnvVariable "ANDROID_NDK_PATH" (Join-Path $rootDevPath "\ndk\android-ndk-r8d")
+setEnvVariable "ANDROID_SDK_HOME" (Join-Path $rootDevPath "\android-sdk")
+setEnvVariable "ADT_HOME" (Join-Path $rootDevPath "\android-sdk")
 
 # Ant
-[System.Environment]::SetEnvironmentVariable("PATH", $Env:Path + ";" + (Join-Path $rootDevPath "\apache-ant-1.9.4\bin"), "Process")
-[System.Environment]::SetEnvironmentVariable("ANT_HOME", (Join-Path $rootDevPath "\apache-ant-1.9.4"), "Process")
+setEnvVariable "ANT_HOME" (Join-Path $rootDevPath "\apache-ant-1.9.4")
+setEnvVariable "PATH" ($Env:Path + ";" + (Join-Path $rootDevPath "\apache-ant-1.9.4\bin"))
 
 
 ## [System.Environment]::SetEnvironmentVariable("GIT_EXTERNAL_DIFF", ($toolsPath.Replace('\', '/') + '/KDiff3/kdiff3.exe'), "Process")
