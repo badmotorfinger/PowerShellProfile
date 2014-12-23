@@ -4,8 +4,8 @@
 ##
 ##############################################################################
 
-$rootPath = 'C:\Users\Vince\SkyDrive'
-$rootDevPath = 'D:\dev\'
+$rootPath = '%rootPath%'
+$rootDevPath = '%rootDevPath%'
 
 $toolsPath = "$rootPath\tools"
 $utilsPath = "$rootPath\utils"
@@ -13,22 +13,17 @@ $gitPath = "$toolsPath\git"
 $scriptsPath = "$rootPath\psscripts"
 $hgPath = "$toolsPath\mercurial"
 
-
 function setEnvVariable($name, $value)
 {
-    $existingValue = [System.Environment]::GetEnvironmentVariable($name)
-
     if ($name -eq "PATH") {
-        if ($existingValue -contains $value) {
-            return;
-        }
-
-        [System.Environment]::SetEnvironmentVariable($name, $Env:Path.TrimEnd(';') + ";" + $value, "Process")
+      $existingValue = [System.Environment]::GetEnvironmentVariable($name)
+      if ($existingValue -contains $value) {
         return;
+      }
+	$value = $Env:Path.TrimEnd(';') + ";" + $value
     }
-
     [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
-    setx $name $value | Out-Null
+    setx $name $value
 }
 
 setEnvVariable "PATH" $toolsPath
@@ -39,6 +34,9 @@ setEnvVariable "PATH" (Join-Path $toolsPath "\UnixUtils")
 setEnvVariable "PATH" (Join-Path $utilsPath "\SysinternalsSuite")
 setEnvVariable "PATH" (Join-Path $toolsPath "\fizzler")
 setEnvVariable "PATH" (Join-Path $toolsPath "\Remote Desktop Connection Manager")
+
+# NodeJS
+setEnvVariable "PATH" 'C:\Users\Vince\AppData\Roaming\npm'
 
 # Go lang
 setEnvVariable "PATH" (Join-Path $rootDevPath "\go\bin")
@@ -61,6 +59,9 @@ setEnvVariable "ADT_HOME" (Join-Path $rootDevPath "\android-sdk")
 # Ant
 setEnvVariable "ANT_HOME" (Join-Path $rootDevPath "\apache-ant-1.9.4")
 setEnvVariable "PATH" (Join-Path $rootDevPath "\apache-ant-1.9.4\bin")
+
+# Vim
+setEnvVariable "VIM" (Join-Path $rootPath "\tools\Vim")
 
 ## [System.Environment]::SetEnvironmentVariable("GIT_EXTERNAL_DIFF", ($toolsPath.Replace('\', '/') + '/KDiff3/kdiff3.exe'), "Process")
 

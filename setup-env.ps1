@@ -1,8 +1,7 @@
 #Run this script the first time you log on to a machine you've never logged on to before.
 
-#$env:path.IndexOf('Chocolatey', [System.StringComparison]::OrdinalIgnoreCase) -gt 0
-
-$rootDevPath = 'D:\dev\'
+$rootPath = 'C:\Users\Vince\OneDrive'
+$rootDevPath = 'C:\dev\'
 $currentDir = Split-Path $MyInvocation.MyCommand.Definition
 
 Write-Host "Current directory is $currentDir"
@@ -13,11 +12,11 @@ if (-not (Test-Path $powershellProfileDir)) {
     mkdir $powershellProfileDir
 }
 
-$rootPath = [System.IO.Directory]::GetParent($currentDir).Parent
-
 Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" |
-	% { $_.Replace('%rootPath%', $rootPath.FullName) } |
+	% { $_.Replace('%rootPath%', $rootPath) } |
     % { $_.Replace('%rootDevPath%', $rootDevPath) } | Set-Content $PROFILE
+
+Write-Host "Wrote profile to $PROFILE"
 
 $moduleRoot = $env:PSModulePath.Split(";")[0]
 
@@ -34,7 +33,7 @@ function CopyModule
 	if (-not (Test-Path $ptDir)) {
 		md -Path $ptDir
 	}
-	Copy-Item ($startingPath + $moduleName) -Dest $moduleRoot -Recurse -Force -Verbose
+	Copy-Item ($startingPath + $moduleName) -Dest $moduleRoot -Recurse -Force
 }
 
 # Modules
@@ -48,6 +47,6 @@ CopyModule 'PSReadLine'
 Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow
 Write-Host
-Write-Host "Root Path = $currentDir" -ForegroundColor Green
+Write-Host "Root Path = $rootPath" -ForegroundColor Green
 Write-Host "Root Development Path = $rootDevPath" -ForegroundColor Green
 Write-Host
