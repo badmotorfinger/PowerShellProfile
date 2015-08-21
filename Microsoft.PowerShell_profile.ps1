@@ -7,75 +7,17 @@
 $rootPath = '%rootPath%'
 $rootDevPath = '%rootDevPath%'
 
-$toolsPath = "$rootPath\tools"
-$utilsPath = "$rootPath\utils"
-$gitPath = "$toolsPath\git"
-$scriptsPath = "$rootPath\psscripts"
-$hgPath = "$toolsPath\mercurial"
-
-function setEnvVariable($name, $value)
-{
-    if ($name -eq "PATH") {
-      $existingValue = [System.Environment]::GetEnvironmentVariable($name)
-      if ($existingValue -contains $value) {
-        return;
-      }
-	$value = $Env:Path.TrimEnd(';') + ";" + $value
-    }
-    [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
-    setx $name $value
-}
-
-setEnvVariable "PATH" $toolsPath
-setEnvVariable "PATH" (Join-Path $gitPath "\bin")
-setEnvVariable "PATH" $hgPath
-setEnvVariable "PATH" $scriptsPath
-setEnvVariable "PATH" (Join-Path $toolsPath "\UnixUtils")
-setEnvVariable "PATH" (Join-Path $utilsPath "\SysinternalsSuite")
-setEnvVariable "PATH" (Join-Path $toolsPath "\fizzler")
-setEnvVariable "PATH" (Join-Path $toolsPath "\Remote Desktop Connection Manager")
-
-# NodeJS
-setEnvVariable "PATH" 'C:\Users\Vince\AppData\Roaming\npm'
-
-# Go lang
-setEnvVariable "PATH" (Join-Path $rootDevPath "\go\bin")
-setEnvVariable "GOROOT" (Join-Path $rootDevPath "\go")
-
-# Python
-setEnvVariable "PATH" (Join-Path $rootDevPath "\python27")
-setEnvVariable "PATH" (Join-Path $rootDevPath "\python27\scripts")
-
-# Ruby
-setEnvVariable "PATH" (Join-Path $rootDevPath "\Ruby193\bin")
-
-# Android
-setEnvVariable "PATH" (Join-Path $rootDevPath "\android-sdk\tools")
-setEnvVariable "PATH" (Join-Path $rootDevPath "\android-sdk\platform-tools")
-setEnvVariable "ANDROID_NDK_PATH" (Join-Path $rootDevPath "\ndk\android-ndk-r8d")
-setEnvVariable "ANDROID_SDK_HOME" (Join-Path $rootDevPath "\android-sdk")
-setEnvVariable "ADT_HOME" (Join-Path $rootDevPath "\android-sdk")
-
-# Ant
-setEnvVariable "ANT_HOME" (Join-Path $rootDevPath "\apache-ant-1.9.4")
-setEnvVariable "PATH" (Join-Path $rootDevPath "\apache-ant-1.9.4\bin")
-
-# Vim
-setEnvVariable "VIM" (Join-Path $rootPath "\tools\Vim")
-
-## [System.Environment]::SetEnvironmentVariable("GIT_EXTERNAL_DIFF", ($toolsPath.Replace('\', '/') + '/KDiff3/kdiff3.exe'), "Process")
-
-Set-Alias fiddler "$toolsPath\Fiddler2\fiddler.exe"
-Set-Alias pgui "$toolsPath\PowerGUI\ScriptEditor.exe"
-Set-Alias npp "$toolsPath\Notepad++\Notepad++.exe"
-Set-Alias np2 "$toolsPath\notepad2.exe"
-Set-Alias kdiff "$toolsPath\kDiff3\kdiff3.exe"
-Set-Alias ilspy "$toolsPath\ILSpy\ilspy.exe"
-Set-Alias lpad "$toolsPath\LINQPad\LINQPad.exe"
-Set-Alias winm "$toolsPath\WinMerge\WinMergeU.exe"
+Set-Alias fiddler "$Env:TOOLS\Fiddler2\fiddler.exe"
+Set-Alias pgui "$Env:TOOLS\PowerGUI\ScriptEditor.exe"
+Set-Alias npp "$Env:TOOLS\Notepad++\Notepad++.exe"
+Set-Alias np2 "$Env:TOOLS\notepad2.exe"
+Set-Alias kdiff "$Env:TOOLS\kDiff3\kdiff3.exe"
+Set-Alias ilspy "$Env:TOOLS\ILSpy\ilspy.exe"
+Set-Alias lpad "$Env:TOOLS\LINQPad\LINQPad.exe"
+Set-Alias winm "$Env:TOOLS\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
-Set-Alias regexb "$toolsPath\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "$toolsPath\Vim\vim74\gvim.exe"
+Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
+Set-Alias vim "$Env:TOOLS\Vim\vim74\gvim.exe"
 Set-Alias efh ExplorerFromHere
 Set-Alias fsi "C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\fsi.exe"
 Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
