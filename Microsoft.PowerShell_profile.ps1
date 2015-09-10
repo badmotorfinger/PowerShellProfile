@@ -53,18 +53,10 @@ function prompt {
 
 	ImportModules
 	GetAliasSuggestion #Display aliases for commands if they exist.
-
-    $symbolicref = git symbolic-ref HEAD
-
-    if($symbolicref -ne $NULL) {
-		Write-Host (Get-Date -Format "HH:mm:ss") -ForegroundColor DarkYellow -NoNewline
-        Write-Host " - git ["$symbolicref.substring($symbolicref.LastIndexOf("/") +1)"] "
-    } else {
-		Write-Host (Get-Date -Format "HH:mm:ss") -ForegroundColor DarkYellow
-	}
-
-	# No need to use the return keyword
-	"[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
+	
+		  Write-Host (Get-Date -Format "HH:mm:ss") -ForegroundColor DarkYellow
+	    # No need to use the return keyword
+  	  "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
  }
 
  # Calls Get-AliasSuggestion.ps1 in the tools directory.
