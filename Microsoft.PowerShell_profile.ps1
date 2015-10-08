@@ -4,9 +4,6 @@
 ##
 ##############################################################################
 
-$rootPath = '%rootPath%'
-$rootDevPath = '%rootDevPath%'
-
 Set-Alias fiddler "$Env:TOOLS\Fiddler2\fiddler.exe"
 Set-Alias pgui "$Env:TOOLS\PowerGUI\ScriptEditor.exe"
 Set-Alias npp "$Env:TOOLS\Notepad++\Notepad++.exe"
@@ -19,7 +16,6 @@ Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
 Set-Alias vim "$Env:TOOLS\Vim\vim74\gvim.exe"
 Set-Alias efh ExplorerFromHere
-Set-Alias fsi "C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\fsi.exe"
 Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
 function gs { invoke-command -scriptblock { git status } }
@@ -89,20 +85,25 @@ function prompt {
 
     if ($global:mod_loaded -eq $null) {
 
-        if (-not (Get-Module Pscx)) {
-            Write-Host "Importing Pscx module..." -NoNewline
-            Import-Module Pscx | Out-Null
+        #if (-not (Get-Module Pscx)) {
+        #    Write-Host "Importing Pscx module..." -NoNewline
+        #    Import-Module Pscx | Out-Null
+        #    Write-Host 'Done' -ForegroundColor Yellow
+        #}
+
+        #if (-not (Get-Module PowerTab)) {
+        #    if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
+        #        $null = Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml" | Out-Null
+        #    } else {
+        #        Import-Module PowerTab | Out-Null
+        #    }
+        #}
+
+        if (-not (Get-Module Git-PsRadar)) {
+            Write-Host "Importing git-psradar..." -NoNewline
+            Import-Module Git-PsRadar
             Write-Host 'Done' -ForegroundColor Yellow
         }
-
-        if (-not (Get-Module PowerTab)) {
-            if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
-                $null = Import-Module PowerTab -ArgumentList "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml" | Out-Null
-            } else {
-                Import-Module PowerTab | Out-Null
-            }
-        }
-
         if (-not (Get-Module z)) {
             Write-Host "Importing z module..." -NoNewline
             Import-Module z
