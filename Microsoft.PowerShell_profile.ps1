@@ -51,7 +51,6 @@ function prompt {
 	ImportModules
 	GetAliasSuggestion #Display aliases for commands if they exist.
 	
-		  Write-Host (Get-Date -Format "HH:mm:ss") -ForegroundColor DarkYellow
 	    # No need to use the return keyword
   	  "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
  }
@@ -86,21 +85,27 @@ function prompt {
 
     if ($global:mod_loaded -eq $null) {
 
-        pushd 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC'
-        cmd /c "vcvarsall.bat&set" |
-        foreach {
-          if ($_ -match "=") {
-            $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
+        $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC';
+        if ((Test-Path $vsPath))
+        {
+          pushd $vsPath
+          cmd /c "vcvarsall.bat&set" |
+          foreach {
+            if ($_ -match "=") {
+              $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
+            }
           }
+          popd
+          write-host "Visual Studio 2015 Command Prompt variables set." -ForegroundColor Magenta
+        } else {
+            Write-Host "Visual Studio 2015 not found" -ForegroundColor Red
         }
-        popd
-        write-host "Visual Studio 2015 Command Prompt variables set." -ForegroundColor Magenta
 
-        #if (-not (Get-Module Pscx)) {
-        #    Write-Host "Importing Pscx module..." -NoNewline
-        #    Import-Module Pscx | Out-Null
-        #    Write-Host 'Done' -ForegroundColor Yellow
-        #}
+        if (-not (Get-Module Pscx)) {
+            Write-Host "Importing Pscx module..." -NoNewline
+            Import-Module Pscx | Out-Null
+            Write-Host 'Done' -ForegroundColor Yellow
+        }
 
         #if (-not (Get-Module PowerTab)) {
         #    if (Test-Path "$env:userprofile\Documents\WindowsPowerShell\PowerTabConfig.xml") {
