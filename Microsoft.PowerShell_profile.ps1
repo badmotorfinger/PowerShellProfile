@@ -49,10 +49,10 @@ function prompt {
 	 }
 
 	ImportModules
-	GetAliasSuggestion #Display aliases for commands if they exist.
+	#GetAliasSuggestion #Display aliases for commands if they exist.
 	
-	    # No need to use the return keyword
-  	  "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
+	# No need to use the return keyword
+  	"[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
  }
 
  # Calls Get-AliasSuggestion.ps1 in the tools directory.
