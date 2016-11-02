@@ -30,6 +30,9 @@ function gsvn { invoke-command -scriptblock { git svn dcommit } }
 $env:TERM = 'cygwin'
 $env:LESS = 'FRSX'
 
+# Remove default PowerShell alias
+Remove-Item alias:curl
+
 $Global:maximumHistoryCount = 1024
 $Global:CurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
 $UserType = "User"
