@@ -165,6 +165,9 @@ setEnvVariable "PATH" 'C:\Program Files\nodejs\'
 setEnvVariable "PATH" "$env:USERPROFILE\AppData\Roaming\npm"
 setEnvVariable "NODE_PATH" "$env:USERPROFILE\AppData\Roaming\npm"
 
+# curl
+setEnvVariable "PATH" "$rootDevToolsPath\curl"
+
 # git
 setEnvVariable "GIT_HOME" 'C:\Program Files\Git'
 setEnvVariable "PATH" 'C:\Program Files\Git\cmd'

@@ -22,6 +22,7 @@ Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\
 function gs { invoke-command -scriptblock { git status } }
 function glog { invoke-command -scriptblock { git log --name-status } }
 function glogs { invoke-command -scriptblock { git log -p } }
+function glogk { invoke-command -scriptblock { git log --all --graph --decorate --oneline --simplify-by-decoration } }
 function gsvn { invoke-command -scriptblock { git svn dcommit } } # git svn commit alias
 function ExplorerFromHere { explorer (Get-Location).Path }
 function gsvn { invoke-command -scriptblock { git svn dcommit } }
