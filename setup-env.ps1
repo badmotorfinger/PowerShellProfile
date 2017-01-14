@@ -1,15 +1,14 @@
 ﻿#Run this script the first time you log on to a machine you've never logged on to before.
 cls
 
-$rootPath =         'C:\Users\PANU9999\OneDrive'       # The location of utilities
-$rootDevLangPath =  'C:\dev\lang'            	# The location of programing languages
-$rootDevToolsPath = 'C:\Users\PANU9999\OneDrive\tools'
+$rootPath =         'E:\OneDrive'       # The location of utilities
+$rootDevLangPath =  'C:\dev\lang'            	       # The location of programing languages
+$rootDevToolsPath = 'E:\OneDrive\tools'
 
 $jdkVersion = 'jre1.8.0_45'
 $antVersion = '1.9.4'
 $gradleVersion = '2.6'
 $rubyVersion = '22-x64'
-$pythonVersion = '27'
 
 
 if (-not (Test-Path -Path $rootPath)) {
@@ -26,14 +25,22 @@ if (-not (Test-Path -Path $rootDevToolsPath)) {
 }
 
 if (-not (Test-Path -Path $rootDevLangPath)) {
-    Write-Host "Could not find root languages path $rootDevLangPath" -ForegroundColor Red
-    return
+    Write-Host "Could not find root languages path $rootDevLangPath" -ForegroundColor Magenta
 }
 
 
 $currentDir = Split-Path $MyInvocation.MyCommand.Definition
 
 Write-Host "Current directory is $currentDir"
+
+
+# Install Chocolatey
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+
+# Install Packages
+choco install python2
+choco install git
+
 Write-Host
 Write-Host "Installing console font..." -NoNewLine
 $FONTS = 0x14
@@ -138,7 +145,7 @@ function setEnvVariable($name, $value, $checkPath = $true)
     } else {
         if (-not $value.StartsWith("%") -and $checkPath -and (Test-Path -Path $value -IsValid) -and -not (Test-Path $value)) {
 
-            Write-Host "Could not find path $value. Not added to $name." -ForegroundColor Magenta
+            Write-Host "Could not find path $value. Environment variable $name not created." -ForegroundColor Magenta
             return;
         }
     }
@@ -188,8 +195,8 @@ setEnvVariable "PATH" (Join-Path $rootDevLangPath "\go\bin")
 setEnvVariable "GOROOT" (Join-Path $rootDevLangPath "\go")
 
 # Python
-setEnvVariable "PATH" (Join-Path $rootDevLangPath "\python$pythonVersion")
-setEnvVariable "PATH" (Join-Path $rootDevLangPath "\python$pythonVersion\scripts")
+setEnvVariable "PATH" 'C:\Python27'
+setEnvVariable "PATH" 'C:\Python27\scripts'
 
 # Ruby
 setEnvVariable "PATH" (Join-Path $rootDevLangPath "\Ruby$rubyVersion\bin")
@@ -218,8 +225,8 @@ setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion\bin"
 # Vim
 setEnvVariable "VIM" (Join-Path $Env:TOOLS 'Vim')
 
-Write-Host 'Installing npm modules...' -ForegroundColor Green
-npm install -g gh
+#Write-Host 'Installing npm modules...' -ForegroundColor Green
+#npm install -g gh
 
 Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow

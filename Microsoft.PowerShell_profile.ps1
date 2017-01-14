@@ -15,7 +15,7 @@ Set-Alias lp5 "$Env:TOOLS\LINQPad5\LINQPad.exe"
 Set-Alias winm "$Env:TOOLS\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "$Env:TOOLS\Vim\vim74\gvim.exe"
+Set-Alias vim "$Env:TOOLS\Vim\vim80\gvim.exe"
 Set-Alias efh ExplorerFromHere
 Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
@@ -55,43 +55,9 @@ function prompt {
 	 }
 
 	ImportModules
-<<<<<<< Updated upstream
-	#GetAliasSuggestion #Display aliases for commands if they exist.
 	
 	# No need to use the return keyword
   	"[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
-=======
-	GetAliasSuggestion #Display aliases for commands if they exist.
-WRite-Host "yer"	
-	    # No need to use the return keyword
-  	  "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
->>>>>>> Stashed changes
- }
-
- # Calls Get-AliasSuggestion.ps1 in the tools directory.
- function GetAliasSuggestion {
-
-	## Get the last item from the history
-
-	$historyItem = Get-History -Count 1
-
-	## If there were any history items
-    if($historyItem)
-    {
-        ## Get the training suggestion for that item
-        $suggestions = @(Get-AliasSuggestion $historyItem.CommandLine)
-
-        ## If there were any suggestions
-        if($suggestions)
-        {
-            ## For each suggestion, write it to the screen
-            foreach($aliasSuggestion in $suggestions)
-            {
-                Write-Host "$aliasSuggestion"
-            }
-            Write-Host ""
-        }
-    }
  }
 
  function ImportModules() {
