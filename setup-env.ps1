@@ -34,6 +34,13 @@ if (-not (Test-Path -Path $rootDevLangPath)) {
 $currentDir = Split-Path $MyInvocation.MyCommand.Definition
 
 Write-Host "Current directory is $currentDir"
+Write-Host
+Write-Host "Installing console font..." -NoNewLine
+$FONTS = 0x14
+$objShell = New-Object -ComObject Shell.Application
+$objFolder = $objShell.Namespace($FONTS)
+$objFolder.CopyHere("$currentDir\PragmataPro.ttf")
+Write-Host "done."
 
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
@@ -173,6 +180,8 @@ setEnvVariable "GIT_HOME" 'C:\Program Files\Git'
 setEnvVariable "PATH" 'C:\Program Files\Git\cmd'
 setEnvVariable "PATH" 'C:\Program Files\Git\mingw64\bin'
 setEnvVariable "PATH" 'C:\Program Files\Git\usr\bin'
+
+setEnvVariable "PATH" 'C:\Program Files\gs\gs9.19\bin'
 
 # Go lang
 setEnvVariable "PATH" (Join-Path $rootDevLangPath "\go\bin")
