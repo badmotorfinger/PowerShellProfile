@@ -49,6 +49,11 @@ $objFolder = $objShell.Namespace($FONTS)
 $objFolder.CopyHere("$currentDir\PragmataPro.ttf")
 Write-Host "done."
 
+# Install powerline for Vim
+c:
+cd python27\scripts
+pip install powerline-status
+
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
 
