@@ -47,6 +47,8 @@ $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application
 $objFolder = $objShell.Namespace($FONTS)
 $objFolder.CopyHere("$currentDir\PragmataPro.ttf")
+$objFolder.CopyHere("$currentDir\Inconsolata for Powerline.otf")
+$objFolder.CopyHere("$currentDir\PragmataPro for Powerline.ttf")
 Write-Host "done."
 
 # Install powerline for Vim
