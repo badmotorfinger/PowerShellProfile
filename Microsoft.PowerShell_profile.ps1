@@ -23,6 +23,9 @@ function gs { invoke-command -scriptblock { git status } }
 function glog { invoke-command -scriptblock { git log --name-status } }
 function glogs { invoke-command -scriptblock { git log -p } }
 function glogk { invoke-command -scriptblock { git log --all --graph --decorate --oneline --simplify-by-decoration } }
+function gbranch-recent { invoke-command -scriptblock { git log --all --graph --decorate --oneline --simplify-by-decoration } }
+function lg1 {git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all }
+function lg2 {git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all }
 function gsvn { invoke-command -scriptblock { git svn dcommit } } # git svn commit alias
 function ExplorerFromHere { explorer (Get-Location).Path }
 function gsvn { invoke-command -scriptblock { git svn dcommit } }
