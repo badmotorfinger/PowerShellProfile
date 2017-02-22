@@ -1,14 +1,15 @@
 ﻿#Run this script the first time you log on to a machine you've never logged on to before.
 cls
 
-$rootPath =         'E:\OneDrive'       # The location of utilities
-$rootDevLangPath =  'C:\dev\lang'            	       # The location of programing languages
-$rootDevToolsPath = 'E:\OneDrive\tools'
+$rootPath         = 'E:\OneDrive'                       # The location of utilities
+$rootDevLangPath  = 'C:\dev\lang'            	          # The location of programing languages
+$rootDevToolsPath = 'C:\Users\PANU9999\OneDrive\tools'
+$scriptsPath      = 'C:\dev'
 
-$jdkVersion = 'jre1.8.0_45'
-$antVersion = '1.9.4'
-$gradleVersion = '2.6'
-$rubyVersion = '22-x64'
+$jdkVersion       = 'jre1.8.0_45'
+$antVersion       = '1.9.4'
+$gradleVersion    = '2.6'
+$rubyVersion      = '22-x64'
 
 
 if (-not (Test-Path -Path $rootPath)) {
@@ -34,15 +35,21 @@ $currentDir = Split-Path $MyInvocation.MyCommand.Definition
 Write-Host "Current directory is $currentDir"
 
 
-# Install Chocolatey
+Write-Host 'Installing Chocolatey...' -ForegroundColor Green
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
 # Install Packages
 choco install python2
 choco install git
+choco install nodejs
 
+
+Write-Host 'Installing npm modules...' -ForegroundColor Green
+npm install -g firstaidgit
 Write-Host
-Write-Host "Installing console font..." -NoNewLine
+
+
+Write-Host "Installing fonts for vim and powerline..." -NoNewLine
 $FONTS = 0x14
 $objShell = New-Object -ComObject Shell.Application
 $objFolder = $objShell.Namespace($FONTS)
@@ -51,9 +58,9 @@ $objFolder.CopyHere("$currentDir\Inconsolata for Powerline.otf")
 $objFolder.CopyHere("$currentDir\PragmataPro for Powerline.ttf")
 Write-Host "done."
 
-# Install powerline for Vim
+Write-Host 'Installing powerline for vim...' -ForegroundColor Green
 c:
-cd python27\scripts
+cd \python27\scripts
 pip install powerline-status
 
 # Create the PowerShell profile directory if it doesn't exist
@@ -85,7 +92,7 @@ if (-not (Test-Path $moduleRoot)) {
 # Clear the current user PATH variable as it's going to be reset below
 [System.Environment]::SetEnvironmentVariable('PATH', '', [System.EnvironmentVariableTarget]::User)
 
-
+# A function for copying PowerShell modules so they can be loaded in a session
 function CopyModule
 {
 	param($moduleName, $startingPath = '..\Modules\')
@@ -108,6 +115,7 @@ function CopyModule
     }
 }
 
+# Look in both Program Files directories to find a child path
 function Get-ProgramPath($path, $childPath) {
 
     if ($path -ne $null -and $path.StartsWith('C:\Program Files')) {
@@ -176,7 +184,7 @@ $Env:SCRIPTS = "$rootPath\scripts"
 setEnvVariable "SCRIPTS" $Env:SCRIPTS
 
 setEnvVariable "PATH" $Env:TOOLS
-setEnvVariable "PATH" "$rootPath\scripts\psscripts"
+setEnvVariable "PATH" "$scriptsPath\scripts\psscripts"
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\UnixUtils")
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\SysinternalsSuite")
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\Remote Desktop Connection Manager")
@@ -231,9 +239,6 @@ setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion\bin"
 
 # Vim
 setEnvVariable "VIM" (Join-Path $Env:TOOLS 'Vim')
-
-#Write-Host 'Installing npm modules...' -ForegroundColor Green
-#npm install -g gh
 
 Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow
