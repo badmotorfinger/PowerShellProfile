@@ -65,6 +65,10 @@ c:
 cd \python27\scripts
 pip install powerline-status
 
+# Symlink config files which are meant to be in the home directory to the repo
+. "$rootPath\tools\sysinternals\junction.exe" "$env:USERPROFILE\.gitignore" "$currentDir\home-config\.gitignore"
+. "$rootPath\tools\sysinternals\junction.exe" "$env:USERPROFILE\.gitconfig" "$currentDir\home-config\.gitconfig"
+
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
 
