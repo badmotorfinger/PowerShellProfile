@@ -65,9 +65,6 @@ c:
 cd \python27\scripts
 pip install powerline-status
 
-# Symlink config files which are meant to be in the home directory to the repo
-. "$rootPath\tools\sysinternals\junction.exe" "$env:USERPROFILE\.gitignore" "$currentDir\home-config\.gitignore"
-. "$rootPath\tools\sysinternals\junction.exe" "$env:USERPROFILE\.gitconfig" "$currentDir\home-config\.gitconfig"
 
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
@@ -76,6 +73,7 @@ if (-not (Test-Path $powershellProfileDir)) {
     mkdir $powershellProfileDir
     Write-Host "Created PowerShell profile directory $powershellProfileDir" -ForegroundColor Green
 }
+
 
 # If the profile file is not named Microsoft.PowerShell_profile.ps1 then the profile won't load.
 $profileFullPath = Join-Path -Path $powershellProfileDir -ChildPath "Microsoft.PowerShell_profile.ps1"
@@ -182,6 +180,12 @@ Install-Module -Name z
 Install-Module -Name Git-PsRadar
 Install-Module -Name posh-git
 Install-Module -Name PSReadline
+
+
+# Symlink config files which are meant to be in the home directory to the repo
+New-HardLink "$env:USERPROFILE\.gitignore" "$currentDir\home-config\.gitignore"
+New-HardLink "$env:USERPROFILE\.gitconfig" "$currentDir\home-config\.gitconfig"
+
 
 $Env:TOOLS = "$rootPath\tools"
 setEnvVariable "TOOLS" $Env:TOOLS
