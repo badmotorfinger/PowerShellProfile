@@ -1,10 +1,12 @@
 ﻿#Run this script the first time you log on to a machine you've never logged on to before.
 cls
 
-$rootPath         = 'E:\OneDrive'                       # The location of utilities
-$rootDevLangPath  = 'C:\dev\lang'            	          # The location of programing languages
-$rootDevToolsPath = 'C:\Users\PANU9999\OneDrive\tools'
-$scriptsPath      = 'C:\dev'
+# The location of utilities
+$rootPath =         'E:\CloudStation'
+# The location of programing languages
+$rootDevLangPath  = 'C:\dev\lang'
+$rootDevToolsPath = 'E:\CloudStation\tools'
+$scriptsPath      = 'D:\gitrepos\scripts'
 
 $jdkVersion       = 'jre1.8.0_45'
 $antVersion       = '1.9.4'
@@ -13,7 +15,7 @@ $rubyVersion      = '22-x64'
 
 
 if (-not (Test-Path -Path $rootPath)) {
-	$rootPath = "$env:USERPROFILE\OneDrive"
+	  #$rootPath = "$env:USERPROFILE\
     if (-not (Test-Path -Path $rootPath)) {
         Write-Host "Could not find root path $rootPath" -ForegroundColor Red
         return
@@ -180,11 +182,9 @@ Install-Module -Name PSReadline
 $Env:TOOLS = "$rootPath\tools"
 setEnvVariable "TOOLS" $Env:TOOLS
 
-$Env:SCRIPTS = "$rootPath\scripts"
-setEnvVariable "SCRIPTS" $Env:SCRIPTS
 
 setEnvVariable "PATH" $Env:TOOLS
-setEnvVariable "PATH" "$scriptsPath\scripts\psscripts"
+setEnvVariable "PATH" "$scriptsPath\psscripts"
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\UnixUtils")
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\SysinternalsSuite")
 setEnvVariable "PATH" (Join-Path $Env:TOOLS "\Remote Desktop Connection Manager")
