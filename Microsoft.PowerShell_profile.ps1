@@ -67,20 +67,20 @@ function prompt {
 
     if ($global:mod_loaded -eq $null) {
 
-        $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC';
+        $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
         if ((Test-Path $vsPath))
         {
           pushd $vsPath
-          cmd /c "vcvarsall.bat&set" |
+          cmd /c "VsDevCmd.bat&set" |
           foreach {
             if ($_ -match "=") {
               $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
             }
           }
           popd
-          write-host "Visual Studio 2015 Command Prompt variables set." -ForegroundColor Magenta
+          write-host "Visual Studio 2017 Command Prompt variables set." -ForegroundColor Magenta
         } else {
-            Write-Host "Visual Studio 2015 not found" -ForegroundColor Red
+            Write-Host "Visual Studio 2017 not found" -ForegroundColor Red
         }
 
         if (-not (Get-Module Pscx)) {

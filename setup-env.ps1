@@ -4,7 +4,7 @@ cls
 # The location of utilities
 $rootPath =         'E:\CloudStation'
 # The location of programing languages
-$rootDevLangPath  = 'C:\dev\lang'
+$rootDevLangPath  = 'D:\lang'
 $rootDevToolsPath = 'E:\CloudStation\tools'
 $scriptsPath      = 'D:\gitrepos\scripts'
 
