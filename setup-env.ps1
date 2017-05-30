@@ -15,7 +15,6 @@ $rubyVersion      = '22-x64'
 
 
 if (-not (Test-Path -Path $rootPath)) {
-	  #$rootPath = "$env:USERPROFILE\
     if (-not (Test-Path -Path $rootPath)) {
         Write-Host "Could not find root path $rootPath" -ForegroundColor Red
         return
