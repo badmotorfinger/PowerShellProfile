@@ -42,6 +42,7 @@ choco install git --limit-output -y
 choco install nodejs --limit-output -y
 choco install jdk8 --limit-output -y
 choco install ruby --limit-output -y
+choco install sysinternals --limit-output -y
 
 # Add Git to path after install as other tools rely on it.
 # RefreshEnv doesn't seem to work but we'll call it anyway as chocolatey recommends it
@@ -53,8 +54,9 @@ npm install -g firstaidgit
 Write-Host
 
 Write-Host 'Installing and configuring Vim...' -ForegroundColor Green
-cd $repoPath
+md ~\vimfiles\symlink-repos
 git clone https://github.com/vincpa/vimrc
+junction d:\gitrepos\vimrc .\vimrc\
 cd vimrc
 .\install-vim.ps1
 
@@ -186,7 +188,7 @@ setEnvVariable "TOOLS" $Env:TOOLS
 setEnvVariable "PATH" $Env:TOOLS
 setEnvVariable "PATH" "$scriptsPath\psscripts"
 setEnvVariable "PATH" '%TOOLS%\UnixUtils'
-setEnvVariable "PATH" '%TOOLS%\SysinternalsSuite'
+# setEnvVariable "PATH" '%TOOLS%\SysinternalsSuite'
 setEnvVariable "PATH" '%TOOLS%\Remote Desktop Connection Manager'
 
 # NodeJS
