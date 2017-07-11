@@ -244,9 +244,6 @@ setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\gradle-$gradleVersion\bin")
 setEnvVariable "ANT_HOME" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion")
 setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion\bin")
 
-# Vim
-setEnvVariable "VIM" (Join-Path $Env:TOOLS 'Vim')
-
 Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow
 Write-Host

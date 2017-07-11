@@ -18,9 +18,8 @@ Set-Alias lp32mta "$Env:TOOLS\LINQPad5-x86\LINQPad.exe -mta"
 Set-Alias winm "$Env:TOOLS\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "$Env:TOOLS\Vim\vim80\gvim.exe"
+Set-Alias vim "c:\Program Files\Vim\vim80\gvim.exe"
 Set-Alias efh ExplorerFromHere
-Set-Alias vs13 "C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
 function gs { invoke-command -scriptblock { git status } }
 function glog { invoke-command -scriptblock { git log --name-status } }
