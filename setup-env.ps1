@@ -10,7 +10,6 @@ $scriptsPath      = "$repoPath\scripts"
 $jdkVersion       = 'jre1.8.0_45'
 $antVersion       = '1.9.4'
 $gradleVersion    = '2.6'
-$rubyVersion      = '22-x64'
 
 
 if (-not (Test-Path -Path $rootPath)) {
@@ -41,7 +40,13 @@ iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 choco install python2 --limit-output -y
 choco install git --limit-output -y
 choco install nodejs --limit-output -y
+choco install jdk8 --limit-output -y
+choco install ruby --limit-output -y
 
+# Add Git to path after install as other tools rely on it.
+# RefreshEnv doesn't seem to work but we'll call it anyway as chocolatey recommends it
+$Env:Path = ($Env:Path + ";" + 'C:\Program Files\Git\bin')
+RefreshEnv
 
 Write-Host 'Installing npm modules...' -ForegroundColor Green
 npm install -g firstaidgit
@@ -51,7 +56,7 @@ Write-Host 'Installing and configuring Vim...' -ForegroundColor Green
 cd $repoPath
 git clone https://github.com/vincpa/vimrc
 cd vimrc
-.\install-vim.ps1 $repoPath
+.\install-vim.ps1
 
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
@@ -180,57 +185,48 @@ setEnvVariable "TOOLS" $Env:TOOLS
 
 setEnvVariable "PATH" $Env:TOOLS
 setEnvVariable "PATH" "$scriptsPath\psscripts"
-setEnvVariable "PATH" (Join-Path $Env:TOOLS "\UnixUtils")
-setEnvVariable "PATH" (Join-Path $Env:TOOLS "\SysinternalsSuite")
-setEnvVariable "PATH" (Join-Path $Env:TOOLS "\Remote Desktop Connection Manager")
+setEnvVariable "PATH" '%TOOLS%\UnixUtils'
+setEnvVariable "PATH" '%TOOLS%\SysinternalsSuite'
+setEnvVariable "PATH" '%TOOLS%\Remote Desktop Connection Manager'
 
 # NodeJS
-setEnvVariable "PATH" 'C:\Program Files\nodejs\'
-setEnvVariable "PATH" "$env:USERPROFILE\AppData\Roaming\npm"
-setEnvVariable "NODE_PATH" "$env:USERPROFILE\AppData\Roaming\npm"
+# setEnvVariable "PATH" 'C:\Program Files\nodejs\'
+# setEnvVariable "PATH" '%USERPROFILE%\AppData\Roaming\npm'
+# setEnvVariable "NODE_PATH" '%USERPROFILE%\AppData\Roaming\npm'
 
 # curl
 setEnvVariable "PATH" "$rootDevToolsPath\curl"
 
-# git
-setEnvVariable "GIT_HOME" 'C:\Program Files\Git'
-setEnvVariable "PATH" 'C:\Program Files\Git\cmd'
-setEnvVariable "PATH" 'C:\Program Files\Git\mingw64\bin'
-setEnvVariable "PATH" 'C:\Program Files\Git\usr\bin'
-
-setEnvVariable "PATH" 'C:\Program Files\gs\gs9.19\bin'
-
 # Go lang
-setEnvVariable "PATH" (Join-Path $rootDevLangPath "\go\bin")
-setEnvVariable "GOROOT" (Join-Path $rootDevLangPath "\go")
+# setEnvVariable "PATH" (Join-Path $rootDevLangPath "\go\bin")
+# setEnvVariable "GOROOT" (Join-Path $rootDevLangPath "\go")
 
 # Python
-setEnvVariable "PATH" 'C:\Python27'
-setEnvVariable "PATH" 'C:\Python27\scripts'
+# setEnvVariable "PATH" 'C:\Python27'
+# setEnvVariable "PATH" 'C:\Python27\scripts'
 
 # Ruby
-setEnvVariable "PATH" (Join-Path $rootDevLangPath "\Ruby$rubyVersion\bin")
+# setEnvVariable "PATH" (Join-Path $rootDevLangPath "\Ruby$rubyVersion\bin")
 
 # Android
-setEnvVariable "ANDROID_NDK_PATH" "$rootDevToolsPath\Android\android_ndk"
-setEnvVariable "ANDROID_SDK_HOME" "$rootDevToolsPath\Android\android_sdk"
-setEnvVariable "ANDROID_HOME" "$rootDevToolsPath\Android\android_sdk"
-setEnvVariable "ADT_HOME" "$rootDevToolsPath\Android\android_sdk"
-setEnvVariable "PATH" "$rootDevToolsPath\Android\android_sdk\tools"
-setEnvVariable "PATH" "$rootDevToolsPath\Android\android_sdk\platform-tools"
-
+# setEnvVariable "ANDROID_NDK_PATH" "$rootDevToolsPath\Android\android_ndk"
+# setEnvVariable "ANDROID_SDK_HOME" "$rootDevToolsPath\Android\android_sdk"
+# setEnvVariable "ANDROID_HOME" "$rootDevToolsPath\Android\android_sdk"
+# setEnvVariable "ADT_HOME" "$rootDevToolsPath\Android\android_sdk"
+# setEnvVariable "PATH" "$rootDevToolsPath\Android\android_sdk\tools"
+# setEnvVariable "PATH" "$rootDevToolsPath\Android\android_sdk\platform-tools"
 
 # Java
-setEnvVariable "JAVA_HOME" "C:\Program Files\Java\jdk$jdkVersion"
-setEnvVariable "JDK_HOME" "C:\Program Files\Java\jdk$jdkVersion"
-setEnvVariable "PATH" "C:\Program Files\Java\jdk$jdkVersion\bin"
+# setEnvVariable "JAVA_HOME" "C:\Program Files\Java\jdk$jdkVersion"
+# setEnvVariable "JDK_HOME" "C:\Program Files\Java\jdk$jdkVersion"
+# setEnvVariable "PATH" "C:\Program Files\Java\jdk$jdkVersion\bin"
 
 # Gradle
-setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\gradle-$gradleVersion\bin")
+# setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\gradle-$gradleVersion\bin")
 
 # Ant
-setEnvVariable "ANT_HOME" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion")
-setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion\bin")
+# setEnvVariable "ANT_HOME" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion")
+# setEnvVariable "PATH" (Join-Path $rootDevToolsPath "\apache-ant-$antVersion\bin")
 
 Write-Host
 Write-Host 'PowerShell profile installed. Restart PowerShell for settings to take effect.' -ForegroundColor Yellow

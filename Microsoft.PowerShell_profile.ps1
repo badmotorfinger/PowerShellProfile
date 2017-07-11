@@ -69,11 +69,11 @@ function prompt {
 
     if ($global:mod_loaded -eq $null) {
     
-    # Chocolatey profile
-    $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-    if (Test-Path($ChocolateyProfile)) {
-      Import-Module "$ChocolateyProfile"
-    }
+        # Chocolatey profile
+        $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+        if (Test-Path($ChocolateyProfile)) {
+          Import-Module "$ChocolateyProfile"
+        }
 
         $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
         if ((Test-Path $vsPath))
