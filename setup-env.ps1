@@ -38,63 +38,20 @@ Write-Host "Current directory is $currentDir"
 Write-Host 'Installing Chocolatey & packages...' -ForegroundColor Green
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-choco install python2 --limit-output
-choco install git --limit-output
-choco install nodejs --limit-output
+choco install python2 --limit-output -y
+choco install git --limit-output -y
+choco install nodejs --limit-output -y
 
 
 Write-Host 'Installing npm modules...' -ForegroundColor Green
 npm install -g firstaidgit
-# npm packages for vim syntastic javascript checker
-npm install -g eslint
-npm install -g eslint-plugin-react
-npm install -g babel-eslint
-npm install -g eslint-config-defaults
 Write-Host
 
 Write-Host 'Installing and configuring Vim...' -ForegroundColor Green
-choco install vim --limit-output
-
-# Install vim-plug
-md ~\vimfiles\autoload
-$uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-(New-Object Net.WebClient).DownloadFile(
-  $uri,
-  $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(
-    "~\vimfiles\autoload\plug.vim"
-  )
-)
-# Get my vimrc from GitHub and symlink it to where Vim looks for it
 cd $repoPath
 git clone https://github.com/vincpa/vimrc
-cd ~\
-cmd /c mklink _vimrc  "$repoPath\vimrc\_vimrc"
-cmd /c mklink _gvimrc "$repoPath\vimrc\_gvimrc"
-c:
-cd 'Program Files\Vim\Vim80'
-gvim +PlugInstall
-
-Write-Host "Installing fonts for vim and powerline..." -NoNewLine
-$FONTS = 0x14
-$objShell = New-Object -ComObject Shell.Application
-$objFolder = $objShell.Namespace($FONTS)
-$objFolder.CopyHere("$currentDir\PragmataPro.ttf")
-$objFolder.CopyHere("$currentDir\Inconsolata for Powerline.otf")
-$objFolder.CopyHere("$currentDir\PragmataPro for Powerline.ttf")
-Write-Host "done."
-
-Write-Host 'Installing powerline for vim...' -ForegroundColor Green
-c:
-cd \python27\scripts
-pip install powerline-status
-
-$uri = 'https://raw.githubusercontent.com/powerline/powerline/bindings/vim/plugin/master/powerline.vim'
-(New-Object Net.WebClient).DownloadFile(
-  $uri,
-  $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath(
-    "c:\Program Files\Vim\Vim80\plugin\powerline.vim"
-  )
-)
+cd vimrc
+.\install-vim.ps1 $repoPath
 
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
