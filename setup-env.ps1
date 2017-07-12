@@ -1,10 +1,10 @@
-﻿#Run this script the first time you log on to a machine you've never logged on to before.
+#Run this script the first time you log on to a machine you've never logged on to before.
 cls
 
-$rootPath =         'E:\CloudStation'
-$rootDevLangPath  = 'D:\lang'
+$rootPath =         'C:\Users\PANU9999\OneDrive'
+$rootDevLangPath  = 'C:\lang'
 $rootDevToolsPath = "$rootPath\tools"
-$repoPath         = 'D:\gitrepos'
+$repoPath         = 'C:\dev'
 $scriptsPath      = "$repoPath\scripts"
 
 $jdkVersion       = 'jre1.8.0_45'
@@ -37,12 +37,19 @@ Write-Host "Current directory is $currentDir"
 Write-Host 'Installing Chocolatey & packages...' -ForegroundColor Green
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
+choco uninstall python2 --limit-output | Out-Null
+choco uninstall git --limit-output | Out-Null
+choco uninstall nodejs --limit-output | Out-Null
+choco uninstall ruby --limit-output | Out-Null
+choco uninstall sysinternals --limit-output | Out-Null
+choco uninstall winmerge --limit-output | Out-Null
+
 choco install python2 --limit-output -y
 choco install git --limit-output -y
 choco install nodejs --limit-output -y
-choco install jdk8 --limit-output -y
 choco install ruby --limit-output -y
 choco install sysinternals --limit-output -y
+choco install winmerge --limit-output -y
 
 # Add Git to path after install as other tools rely on it.
 # RefreshEnv doesn't seem to work but we'll call it anyway as chocolatey recommends it
@@ -53,12 +60,10 @@ Write-Host 'Installing npm modules...' -ForegroundColor Green
 npm install -g firstaidgit
 Write-Host
 
-Write-Host 'Installing and configuring Vim...' -ForegroundColor Green
-md ~\vimfiles\symlink-repos
-git clone https://github.com/vincpa/vimrc
-junction d:\gitrepos\vimrc .\vimrc\
-cd vimrc
-.\install-vim.ps1
+# Install and configure Vim
+$vimTmpInstallScript = [System.IO.Path]::GetTempFileName() + '.ps1'
+(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/vincpa/vimrc/master/install-vim.ps1', $vimTmpInstallScript)
+Invoke-Expression "& `"$vimTmpInstallScript`" $repoPath"
 
 # Create the PowerShell profile directory if it doesn't exist
 $powershellProfileDir = [System.IO.Directory]::GetParent($PROFILE).FullName
