@@ -1,7 +1,7 @@
 #Run this script the first time you log on to a machine you've never logged on to before.
 cls
 
-$rootPath =         'C:\Users\Vince\OneDrive (2)'
+$rootPath =         'C:\Users\Vince\OneDrive'
 $rootDevLangPath  = 'C:\lang'
 $rootDevToolsPath = "$rootPath\tools"
 $repoPath         = 'C:\dev'
@@ -89,21 +89,21 @@ Write-Host "Current directory is $currentDir"
 
 
 Write-Host 'Installing Chocolatey & packages...' -ForegroundColor Green
-#iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-#choco uninstall python2 --limit-output
-#choco uninstall git --limit-output
-#choco uninstall nodejs --limit-output
-#choco uninstall ruby --limit-output
-#choco uninstall sysinternals --limit-output
-#choco uninstall winmerge --limit-output
+choco uninstall python2 --limit-output
+choco uninstall git --limit-output
+choco uninstall nodejs --limit-output
+choco uninstall ruby --limit-output
+choco uninstall sysinternals --limit-output
+choco uninstall winmerge --limit-output
 
-#choco install python2 --limit-output -y
-#choco install git --limit-output -y
-#choco install nodejs --limit-output -y
-#choco install ruby --limit-output -y
-#choco install sysinternals --limit-output -y
-#choco install winmerge --limit-output -y
+choco install python2 --limit-output -y
+choco install git --limit-output -y
+choco install nodejs --limit-output -y
+choco install ruby --limit-output -y
+choco install sysinternals --limit-output -y
+choco install winmerge --limit-output -y
 
 # Add some tools to path after install as other tools rely on it.
 setEnvVariable "PATH" 'C:\Program Files\Git\cmd'    # Set here for externally called scripts
@@ -114,8 +114,8 @@ $Env:Path = $Env:Path + ';C:\Program Files\nodejs'
 RefreshEnv
 
 Write-Host 'Installing npm modules...' -ForegroundColor Green
-#npm update -g
-#npm install -g firstaidgit
+npm update -g
+npm install -g firstaidgit
 Write-Host
 
 # Install and configure Vim
@@ -158,30 +158,12 @@ New-HardLink "$env:USERPROFILE\.gitconfig" "$currentDir\home-config\.gitconfig"
 $Env:TOOLS = "$rootPath\tools"
 setEnvVariable "TOOLS" $Env:TOOLS
 
-
 setEnvVariable "PATH" "$scriptsPath\psscripts"
 setEnvVariable "PATH" '%TOOLS%\UnixUtils'
-# setEnvVariable "PATH" '%TOOLS%\SysinternalsSuite'
 setEnvVariable "PATH" '%TOOLS%\Remote Desktop Connection Manager'
-
-# NodeJS
-# setEnvVariable "PATH" 'C:\Program Files\nodejs\'
-# setEnvVariable "PATH" '%USERPROFILE%\AppData\Roaming\npm'
-# setEnvVariable "NODE_PATH" '%USERPROFILE%\AppData\Roaming\npm'
 
 # curl
 setEnvVariable "PATH" "$rootDevToolsPath\curl"
-
-# Go lang
-# setEnvVariable "PATH" (Join-Path $rootDevLangPath "\go\bin")
-# setEnvVariable "GOROOT" (Join-Path $rootDevLangPath "\go")
-
-# Python
-# setEnvVariable "PATH" 'C:\Python27'
-# setEnvVariable "PATH" 'C:\Python27\scripts'
-
-# Ruby
-# setEnvVariable "PATH" (Join-Path $rootDevLangPath "\Ruby$rubyVersion\bin")
 
 # Android
 # setEnvVariable "ANDROID_NDK_PATH" "$rootDevToolsPath\Android\android_ndk"
