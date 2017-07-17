@@ -4,17 +4,24 @@
 [core]
 	autocrlf = true
 	excludesfile = 
+	editor = gvim
 [credential]
 	helper = store
 [merge]
 	tool = kdiff3
 [mergetool "kdiff3"]
-	path = E:/OneDrive/tools/KDiff3/kdiff3.exe
+	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
 	trustExitCode = false
-	path = E:/OneDrive/tools/KDiff3/kdiff3.exe
+	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
 [diff]
 	guitool = kdiff3
 [difftool "kdiff3"]
-	path = E:/OneDrive/tools/KDiff3/kdiff3.exe
+	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
 	trustExitCode = false
-	path = E:/OneDrive/tools/KDiff3/kdiff3.exe
+	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
+[branch]
+	autoSetupMerge = always
+[http]
+	postBuffer = 524288000
+[sendpack]
+	sideband = false
