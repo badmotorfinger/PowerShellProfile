@@ -19,6 +19,8 @@ Set-Alias winm "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
 Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
+Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
+Set-Alias mc E:\CloudStation\tools\MidnightCommander\mc.exe
 Set-Alias efh ExplorerFromHere
 
 function gs { invoke-command -scriptblock { git status } }
