@@ -4,12 +4,9 @@
 ##
 ##############################################################################
 
-Set-Alias fiddler "$Env:TOOLS\Fiddler2\fiddler.exe"
-Set-Alias pgui "$Env:TOOLS\PowerGUI\ScriptEditor.exe"
 Set-Alias npp "$Env:TOOLS\Notepad++\Notepad++.exe"
 Set-Alias np2 "$Env:TOOLS\notepad2.exe"
 Set-Alias kdiff "$Env:TOOLS\kDiff3\kdiff3.exe"
-Set-Alias ilspy "$Env:TOOLS\ILSpy\ilspy.exe"
 Set-Alias lpad "$Env:TOOLS\LINQPad5\LINQPad.exe"
 Set-Alias lpadmta "$Env:TOOLS\LINQPad5\LINQPad.exe -mta"
 Set-Alias lp32 "$Env:TOOLS\LINQPad5-x86\LINQPad.exe"
@@ -18,7 +15,6 @@ Set-Alias lp32mta "$Env:TOOLS\LINQPad5-x86\LINQPad.exe -mta"
 Set-Alias winm "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
 Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
 Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
 Set-Alias mc E:\CloudStation\tools\MidnightCommander\mc.exe
 Set-Alias efh ExplorerFromHere
