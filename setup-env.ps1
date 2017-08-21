@@ -91,19 +91,14 @@ Write-Host "Current directory is $currentDir"
 Write-Host 'Installing Chocolatey & packages...' -ForegroundColor Green
 iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-choco uninstall python2 --limit-output
-choco uninstall git --limit-output
-choco uninstall nodejs --limit-output
-choco uninstall ruby --limit-output
-choco uninstall sysinternals --limit-output
-choco uninstall winmerge --limit-output
-
 choco install python2 --limit-output -y
 choco install git --limit-output -y
 choco install nodejs --limit-output -y
 choco install ruby --limit-output -y
 choco install sysinternals --limit-output -y
 choco install winmerge --limit-output -y
+choco install rdcman --limit-output -y
+
 
 # Add some tools to path after install as other tools rely on it.
 setEnvVariable "PATH" 'C:\Program Files\Git\cmd'    # Set here for externally called scripts
@@ -132,17 +127,6 @@ if (-not (Test-Path $powershellProfileDir)) {
 }
 
 
-# If the profile file is not named Microsoft.PowerShell_profile.ps1 then the profile won't load.
-$profileFullPath = Join-Path -Path $powershellProfileDir -ChildPath "Microsoft.PowerShell_profile.ps1"
-
-Get-Content -Path "$currentDir\Microsoft.PowerShell_profile.ps1" |
-	% { $_.Replace('%rootPath%', $rootPath) } |
-    % { $_.Replace('%rootDevPath%', $rootDevPath) } | Set-Content $profileFullPath
-
-Write-Host "Wrote profile to $profileFullPath" -ForegroundColor Green
-
-
-
 # Modules
 Install-Module -Name Pscx -Force
 Install-Module -Name z -Force
@@ -160,7 +144,6 @@ setEnvVariable "TOOLS" $Env:TOOLS
 
 setEnvVariable "PATH" "$scriptsPath\psscripts"
 setEnvVariable "PATH" '%TOOLS%\UnixUtils'
-setEnvVariable "PATH" '%TOOLS%\Remote Desktop Connection Manager'
 
 # curl
 setEnvVariable "PATH" "$rootDevToolsPath\curl"
