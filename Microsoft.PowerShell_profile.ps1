@@ -4,7 +4,7 @@
 ##
 ##############################################################################
 
-Set-Alias npp "$Env:TOOLS\Notepad++\Notepad++.exe"
+Set-Alias npp "C:\Program Files\Notepad++\Notepad++.exe"
 Set-Alias np2 "$Env:TOOLS\notepad2.exe"
 Set-Alias kdiff "$Env:TOOLS\kDiff3\kdiff3.exe"
 Set-Alias lpad "$Env:TOOLS\LINQPad5\LINQPad.exe"

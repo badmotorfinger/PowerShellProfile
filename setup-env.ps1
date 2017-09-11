@@ -98,6 +98,7 @@ choco install ruby --limit-output -y
 choco install sysinternals --limit-output -y
 choco install winmerge --limit-output -y
 choco install rdcman --limit-output -y
+choco install notepadplusplus --limit-output -y
 
 
 # Add some tools to path after install as other tools rely on it.
