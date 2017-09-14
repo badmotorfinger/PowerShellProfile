@@ -78,13 +78,13 @@ Write-Host "Importing posh-git module..." -NoNewline
 Import-Module posh-git
 Write-Host 'Done' -ForegroundColor Yellow
 
-Write-Host "Importing Pscx module..." -NoNewline
-Import-Module Pscx | Out-Null
-Write-Host 'Done' -ForegroundColor Yellow
+#Write-Host "Importing Pscx module..." -NoNewline
+#Import-Module Pscx | Out-Null
+#Write-Host 'Done' -ForegroundColor Yellow
 
-Write-Host "Importing PSReadLine module..." -NoNewline
-Import-Module PSReadline
-Write-Host 'Done' -ForegroundColor Yellow
+#Write-Host "Importing PSReadLine module..." -NoNewline
+#Import-Module PSReadline
+#Write-Host 'Done' -ForegroundColor Yellow
 
 $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
 if ((Test-Path $vsPath))
