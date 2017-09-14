@@ -18,6 +18,7 @@ Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
 Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
 Set-Alias mc E:\CloudStation\tools\MidnightCommander\mc.exe
 Set-Alias efh ExplorerFromHere
+Set-Alias rdcman "E:\OneDrive\tools\Remote Desktop Connection Manager\RDCMan.exe"
 
 function gs { invoke-command -scriptblock { git status } }
 function glog { invoke-command -scriptblock { git log --name-status } }
