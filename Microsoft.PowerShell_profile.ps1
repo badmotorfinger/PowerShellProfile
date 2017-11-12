@@ -4,21 +4,17 @@
 ##
 ##############################################################################
 
-Set-Alias npp "C:\Program Files\Notepad++\Notepad++.exe"
-Set-Alias np2 "$Env:TOOLS\notepad2.exe"
-Set-Alias kdiff "$Env:TOOLS\kDiff3\kdiff3.exe"
-Set-Alias lpad "$Env:TOOLS\LINQPad5\LINQPad.exe"
-Set-Alias lpadmta "$Env:TOOLS\LINQPad5\LINQPad.exe -mta"
-Set-Alias lp32 "$Env:TOOLS\LINQPad5-x86\LINQPad.exe"
-Set-Alias lp32mta "$Env:TOOLS\LINQPad5-x86\LINQPad.exe -mta"
-
+Set-Alias npp "C:\Program Files\Notepad++\notepad++.exe"
+Set-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
+Set-Alias lpad "C:\Program Files (x86)\LINQPad5\LINQPad.exe"
 Set-Alias winm "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
-Set-Alias g "git"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "c:\Program Files (x86)\Vim\vim80\gvim.exe"
-Set-Alias mc E:\CloudStation\tools\MidnightCommander\mc.exe
+Set-Alias vim "C:\Program Files (x86)\vim\vim80\gvim.exe"
+Set-Alias mc "C:\Program Files (x86)\Midnight Commander\mc.exe"
+Set-Alias rdcman "C:\Program Files (x86)\Microsoft\Remote Desktop Connection Manager\RDCMan.exe"
+
+Set-Alias g "git"
 Set-Alias efh ExplorerFromHere
-Set-Alias rdcman "E:\OneDrive\tools\Remote Desktop Connection Manager\RDCMan.exe"
 
 function gs { invoke-command -scriptblock { git status } }
 function glog { invoke-command -scriptblock { git log --name-status } }
@@ -48,16 +44,16 @@ function prompt {
 
 	$Host.UI.RawUI.BackgroundColor = [System.ConsoleColor]::Black
 
-  $Host.UI.RawUI.WindowTitle = "Role($UserType): " + $(Get-Location)
+    $Host.UI.RawUI.WindowTitle = "Role($UserType): " + $(Get-Location)
 
-	if ($UserType -ne "Admin") {
-	  $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::DarkRed
-  } else {
-    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Green
-  }
+    if ($UserType -ne "Admin") {
+	    $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::DarkRed
+    } else {
+        $Host.UI.RawUI.ForegroundColor = [System.ConsoleColor]::Green
+    }
 
 	# No need to use the return keyword
-  "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
+    "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
 }
 
 # Chocolatey profile
@@ -78,13 +74,6 @@ Write-Host "Importing posh-git module..." -NoNewline
 Import-Module posh-git
 Write-Host 'Done' -ForegroundColor Yellow
 
-#Write-Host "Importing Pscx module..." -NoNewline
-#Import-Module Pscx | Out-Null
-#Write-Host 'Done' -ForegroundColor Yellow
-
-#Write-Host "Importing PSReadLine module..." -NoNewline
-#Import-Module PSReadline
-#Write-Host 'Done' -ForegroundColor Yellow
 
 $vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
 if ((Test-Path $vsPath))

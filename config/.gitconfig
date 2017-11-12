@@ -10,15 +10,13 @@
 [merge]
 	tool = kdiff3
 [mergetool "kdiff3"]
-	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
+	path = C:/Program Files/KDiff3/kdiff3.exe
 	trustExitCode = false
-	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
 [diff]
 	guitool = kdiff3
 [difftool "kdiff3"]
-	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
+	path = C:/Program Files/KDiff3/kdiff3.exe
 	trustExitCode = false
-	path = E:/CloudStation/tools/KDiff3/kdiff3.exe
 [branch]
 	autoSetupMerge = always
 [http]
