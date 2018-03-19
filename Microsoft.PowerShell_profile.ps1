@@ -25,6 +25,9 @@ function lg1 {git log --graph --abbrev-commit --decorate --format=format:'%C(bol
 function lg2 {git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all }
 function ExplorerFromHere { explorer (Get-Location).Path }
 
+# Set the default fzf command
+$env:FZF_DEFAULT_COMMAND='cmd /c dir /s/b'
+
 # Fool git in to thinking it's in a TERM session.
 $env:TERM = 'cygwin'
 $env:LESS = 'FRSX'
@@ -53,7 +56,8 @@ function prompt {
     }
 
 	# No need to use the return keyword
-    "[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
+  #"[$env:username@$([System.Net.Dns]::GetHostName()) $(Get-Location)]$ "
+  "$(Get-Location)> "
 }
 
 # Chocolatey profile
