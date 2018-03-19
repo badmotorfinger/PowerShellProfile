@@ -28,6 +28,7 @@ choco install 7zip.install --limit-output -y
 choco install choco install f.lux --limit-output -y
 choco install greenshot --limit-output -y
 choco install sumatrapdf --limit-output -y
+choco install paint.net --limit-output -y
 
 pause
 exit
