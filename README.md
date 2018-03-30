@@ -8,8 +8,8 @@ Then create a junction so that the repo lives with all the other source code `ju
 git configs
 ===========
 
-`cmd /c mklink /H .gitignore .\PowerShell_profile\home-config\.gitignore`
+`cmd /c mklink /H .gitignore .\PowerShell_profile\config\.gitignore`
 
-`cmd /c mklink /H .gitconfig .\PowerShell_profile\home-config\.gitconifg`
+`cmd /c mklink /H .gitconfig .\PowerShell_profile\config\.gitconifg`
 
 `cmd /c mklink /H .\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 .\PowerShell_profile\Microsoft.PowerShell_profile.ps1`
