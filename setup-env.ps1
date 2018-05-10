@@ -82,6 +82,7 @@ New-HardLink "$env:USERPROFILE\.gitconfig" "$currentDir\home-config\.gitconfig"
 
 setEnvVariable "PATH" "d:\gitrepos\psscripts"
 setEnvVariable "PATH" '%TOOLS%\UnixUtils'
+setEnvVariable "PATH" '%USERPROFILE%\AppData\Roaming\Python\Scripts'
 
 
 Write-Host
