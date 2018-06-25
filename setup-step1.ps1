@@ -30,5 +30,10 @@ choco install greenshot --limit-output -y
 choco install sumatrapdf --limit-output -y
 choco install paint.net --limit-output -y
 
+Write-Host 'Installing Scoop & packages...' -ForegroundColor Green
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+
+scoop install ilspy
+
 pause
 exit
