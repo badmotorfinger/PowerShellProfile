@@ -5,6 +5,8 @@ Repo should be placed in `%USERPROFILE%\source\github\PowerShell_profile` so tha
 
 ## git configs
 
+From `~/` or "home" directory c:\users\me
+
 ` cmd /c mklink /H .gitignore .\source\github\PowerShell_profile\config\.gitignore`
 
 `cmd /c mklink /H .gitconfig .\source\github\PowerShell_profile\config\.gitconfig`
