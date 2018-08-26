@@ -33,7 +33,8 @@ choco install paint.net --limit-output -y
 Write-Host 'Installing Scoop & packages...' -ForegroundColor Green
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
-scoop install ilspy
+scoop install perfview
+scoop install dnspy
 
 pause
 exit
