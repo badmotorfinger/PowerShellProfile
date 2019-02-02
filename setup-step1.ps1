@@ -29,6 +29,7 @@ choco install choco install f.lux --limit-output -y
 choco install greenshot --limit-output -y
 choco install sumatrapdf --limit-output -y
 choco install paint.net --limit-output -y
+choco install filezilla --limit-output -y
 
 Write-Host 'Installing Scoop & packages...' -ForegroundColor Green
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
