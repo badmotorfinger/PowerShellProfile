@@ -58,8 +58,8 @@ function setEnvVariable($name, $value, $checkPath = $true)
 # Modules
 Install-Module -Name Pscx -Force -AllowClobber
 Install-Module -Name z -Force -AllowClobber
-Install-Module -Name Git-PsRadar -Force
-Install-Module -Name posh-git -Force
+Install-Module -Name Git-PsRadar -Force -AllowClobber
+Install-Module -Name posh-git -Force -AllowClobber
 
 # Symlink config files which are meant to be in the home directory to the repo
 
