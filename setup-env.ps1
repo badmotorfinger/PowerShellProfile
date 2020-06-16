@@ -67,6 +67,12 @@ New-Item -ItemType HardLink -Path "$env:USERPROFILE\.gitignore" -Target "$curren
 New-Item -ItemType HardLink -Path "$env:USERPROFILE\.gitconfig" -Target "$currentDir\config\.gitconfig"
 New-Item -ItemType HardLink -Path "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" -Target "$currentDir\Microsoft.PowerShell_profile.ps1"
 
+if ((Test-Path "$env:USERPROFILE\AppData\Roaming\ConEmu.xml")) {
+  del "$env:USERPROFILE\AppData\Roaming\ConEmu.xml"
+}
+New-Item -ItemType HardLink -Path "$env:USERPROFILE\AppData\Roaming\ConEmu.xml" -Target "$currentDir\config\ConEmu.xml"
+
+
 # setEnvVariable "PATH" "d:\gitrepos\psscripts"
 # setEnvVariable "PATH" '%TOOLS%\UnixUtils'
 # setEnvVariable "PATH" '%USERPROFILE%\AppData\Roaming\Python\Scripts'
