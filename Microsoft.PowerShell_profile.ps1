@@ -79,7 +79,7 @@ Import-Module posh-git
 Write-Host 'Done' -ForegroundColor Yellow
 
 
-$vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
+$vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools';
 if ((Test-Path $vsPath))
 {
   pushd $vsPath
@@ -90,9 +90,9 @@ if ((Test-Path $vsPath))
     }
   }
   popd
-  Write-Host "Visual Studio 2017 Command Prompt variables set." -ForegroundColor Magenta
+  Write-Host "Visual Studio 2019 Command Prompt variables set." -ForegroundColor Magenta
 } else {
-    Write-Host "Visual Studio 2017 not found" -ForegroundColor Red
+    Write-Host "Visual Studio 2019 not found" -ForegroundColor Red
 }
 
 Write-Host # Leave a blank line once the last module has been imported.
