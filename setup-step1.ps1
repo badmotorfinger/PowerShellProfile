@@ -7,7 +7,7 @@ Write-Host "Current directory is $currentDir"
 
 
 Write-Host 'Installing Chocolatey & packages...' -ForegroundColor Green
-Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 choco install git --limit-output -y
 choco install nodejs --limit-output -y
@@ -27,6 +27,8 @@ choco install sumatrapdf --limit-output -y
 choco install paint.net --limit-output -y
 choco install filezilla --limit-output -y
 choco install unxutils --limit-output -y
+choco install brave --limit-output -y
+choco install nextcloud-client --limit-output -y
 
 Write-Host 'Installing Scoop & packages...' -ForegroundColor Green
 Invoke-Expression (new-object net.webclient).downloadstring('https://get.scoop.sh')
