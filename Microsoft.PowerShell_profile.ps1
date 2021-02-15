@@ -9,7 +9,7 @@ Set-Alias kdiff "C:\Program Files\KDiff3\kdiff3.exe"
 Set-Alias lpad "C:\Program Files (x86)\LINQPad5\LINQPad.exe"
 Set-Alias winm "C:\Program Files (x86)\WinMerge\WinMergeU.exe"
 Set-Alias regexb "$Env:TOOLS\RegexBuddy\RegexBuddy4.exe"
-Set-Alias vim "C:\Program Files (x86)\vim\vim80\gvim.exe"
+Set-Alias vim "C:\tools\vim\vim82\gvim.exe"
 Set-Alias mc "C:\Program Files (x86)\Midnight Commander\mc.exe"
 Set-Alias rdcman "C:\Program Files (x86)\Microsoft\Remote Desktop Connection Manager\RDCMan.exe"
 
@@ -79,7 +79,7 @@ Import-Module posh-git
 Write-Host 'Done' -ForegroundColor Yellow
 
 
-$vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools';
+$vsPath = 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools';
 if ((Test-Path $vsPath))
 {
   pushd $vsPath
@@ -90,9 +90,9 @@ if ((Test-Path $vsPath))
     }
   }
   popd
-  Write-Host "Visual Studio 2017 Command Prompt variables set." -ForegroundColor Magenta
+  Write-Host "Visual Studio 2019 Command Prompt variables set." -ForegroundColor Magenta
 } else {
-    Write-Host "Visual Studio 2017 not found" -ForegroundColor Red
+    Write-Host "Visual Studio 2019 not found" -ForegroundColor Red
 }
 
 Write-Host # Leave a blank line once the last module has been imported.
